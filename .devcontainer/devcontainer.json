@@ -1,0 +1,29 @@
+{
+	"name": "TypeScript Starter",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:0-16",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	"features": {
+  		"ghcr.io/pairspaces/devcontainers/pairspaces:1.0.0": {
+			"token": "eyJraWQiOiJDRXcyd1gxc2swd3VJUkVBUjc4OHBlTitxTys3V3NlXC9hK3BXWEpWelhTdz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3cGlycTg0cHNmbzJhbnZmbXIwYzV0M24zdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicHNfYnVpbGRcL3dyaXRlOnNlcnZpY2VzIiwiYXV0aF90aW1lIjoxNzU3MDE0MjE0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9jSE1NNWE4cmsiLCJleHAiOjE3NTcwMTc4MTQsImlhdCI6MTc1NzAxNDIxNCwidmVyc2lvbiI6MiwianRpIjoiMjA5MDRkYjAtOWM5NS00Zjg0LWI4YmQtYzg4NDRjNmU4NTBlIiwiY2xpZW50X2lkIjoiN3BpcnE4NHBzZm8yYW52Zm1yMGM1dDNuM3YifQ.MdzG2sZLTklr7xBWLVdfHeH8atDgd-unllzikD_eg2HlO2NY2zk5K0D5WEqbJ-maGFT8dzvXeav8aWl_Rss3tt-uaV_qpEoyb9eS3kWYkP5LP9T--e5nRyAH13642VIPJbGwZXDLtgmWPuzeUZN6MUj5_8Fqmz9FGcJA1zfONfJ_iXMICRmiN6v5BZHrf_x1s4C5PT3UL9MF1mi9eIfXX69NnucWv9_vk_9__PZfkNqdESzElf6HF2ffOnUmrazzAakPykrfAovAHDGjdfKtIccN1KjLl7X0yQr2Zg_tkwevbl0Taod89eYhTNDSI01M0CM_2rAlnAQWpEaA8Qt69w"
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// "runArgs": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postStartCommand": "supervisord -c /etc/supervisor/supervisord.conf",
+	"postAttachCommand": "/opt/pair/pair spaces bootstrap",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "root"
+	// "workspaceFolder": "/usr/src/app",
+    // "workspaceMount": "source=/space,target=/usr/src/app,type=bind,consistency=delegated"
+}
