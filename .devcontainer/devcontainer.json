@@ -1,0 +1,9 @@
+{
+	"name": "typescript-starter",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:4-22",
+	"features": {
+  		"ghcr.io/pairspaces/devcontainers-build/pairspaces-build": {}
+	},
+	"postAttachCommand": "/opt/pair/pair spaces create",
+	"remoteUser": "root"
+}
