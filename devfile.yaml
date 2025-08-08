@@ -1,0 +1,43 @@
+schemaVersion: 2.2.0
+metadata:
+  name: pairspaces-dev
+
+components:
+  - name: devenv
+    container:
+      image: node:18
+      mountSources: true
+      command: ["sleep"]
+      args: ["infinity"]
+
+commands:
+  - id: install-pair
+    exec:
+      component: devenv
+      commandLine: curl -fsSL https://raw.githubusercontent.com/pairspaces/devfiles/main/install.sh?a=b | bash
+      group:
+        kind: run
+
+  - id: start-supervisord
+    exec:
+      component: devenv
+      commandLine: supervisord -c /etc/supervisor/supervisord.conf
+      group:
+        kind: run
+
+  - id: bootstrap
+    exec:
+      component: devenv
+      commandLine: |
+        while [ ! -x /opt/pair/pair ]; do sleep 1; done
+        /opt/pair/pair spaces bootstrap "eyJraWQiOiJDRXcyd1gxc2swd3VJUkVBUjc4OHBlTitxTys3V3NlXC9hK3BXWEpWelhTdz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3cGlycTg0cHNmbzJhbnZmbXIwYzV0M24zdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicHNfYnVpbGRcL3dyaXRlOnNlcnZpY2VzIiwiYXV0aF90aW1lIjoxNzU0Njk0MDYwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9jSE1NNWE4cmsiLCJleHAiOjE3NTQ2OTc2NjAsImlhdCI6MTc1NDY5NDA2MCwidmVyc2lvbiI6MiwianRpIjoiODA0ZjViNmQtNzEyOS00NWQxLTg0YmQtNGMwZTViODU0YTRmIiwiY2xpZW50X2lkIjoiN3BpcnE4NHBzZm8yYW52Zm1yMGM1dDNuM3YifQ.mBYuoYh6MMyESrR-NSNBaQRLZpD8TIzOpdRRRmI8JxuclZwYO4s5XWuLjxz07vGrXBeEzvaM1foO5LRC24dl7ieUCCXF1odlgQS0zGEFhhZ5E_wxO8M51iF1_RBRksuX5w8JH0Cdo4_bPXnx8KZxGkTFZR8TZrwfCbtHlyiPXfGULkROM-P90tdWl8TsTXd-W1i-WG91VGq9JYUbpLb5VnwazdwRNMf4AtEmqrOOyUa03p1CMKK4gIa5INkTbPdIntBJ5ogkfKR19jCTAc_8rEKQ_xCSBfr3gQckq4dKrxaXyuRMMhbqL-O9EqepTzHFsQJTDZyLd6eu0OWNSa2uyw"
+      workingDir: /projects
+      group:
+        kind: run
+        isDefault: true
+
+events:
+  postStart:
+    - install-pair
+    - start-supervisord
+    - bootstrap
